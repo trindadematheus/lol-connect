@@ -4,7 +4,8 @@
   "description": "An Electron boilerplate including TypeScript, React, Jest and ESLint.",
   "main": "./dist/main.js",
   "scripts": {
-    "dev": "npm-run-all -p dev:react electron:serve",
+    "dev": "npm-run-all -p dev:react electron:serve node:server",
+    "node:server": "node server/index.js",
     "dev:electron": "cross-env NODE_ENV=development webpack --config webpack/electron.webpack.js --mode development && npm run start:electron",
     "dev:react": "cross-env NODE_ENV=development webpack-dev-server --config webpack/react.webpack.js --mode development",
     "electron:serve": "wait-on http-get://localhost:4000/ && npm run dev:electron",
@@ -22,6 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
@@ -31,6 +33,7 @@
     "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/react": "^10.4.3",
     "@types/electron-devtools-installer": "^2.2.0",
+    "@types/express": "^4.17.11",
     "@types/jest": "^26.0.3",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
@@ -43,7 +46,7 @@
     "cz-conventional-changelog": "3.2.0",
     "electron": "^8.2.2",
     "electron-builder": "^22.7.0",
-    "electron-devtools-installer": "^3.1.0",
+    "electron-devtools-installer": "^3.1.1",
     "eslint": "^7.3.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
@@ -68,8 +71,15 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "league-connect": "^5.0.2",
+    "ngrok": "^3.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-qr-code": "^1.0.5",
     "styled-components": "^5.1.1"
   },
   "build": {
@@ -84,18 +94,6 @@
       "package.json",
       "dist/**"
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
