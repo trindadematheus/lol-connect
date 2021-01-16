@@ -2,19 +2,25 @@ import React from 'react'
 import QRCode from 'react-qr-code'
 
 import { useLOLClient } from '../../hooks/lolclient'
+import * as S from './styles'
 
 const Home: React.FC = () => {
   const { clientData } = useLOLClient()
 
   return (
     <>
-      {
-        clientData === '' ? (
-          <button>Reconectar</button>
+      <S.Container>
+        {clientData === '' ? (
+          <button>reconectar</button>
         ) : (
-          <QRCode value={clientData} />
-        )
-      }
+            <S.QRCodeSection>
+              <h2>Leia o QRCode no celular<br /> para conectar</h2>
+              <S.QRCodeWrapper>
+                <QRCode value={clientData} />
+              </S.QRCodeWrapper>
+            </S.QRCodeSection>
+          )}
+      </S.Container>
     </>
   )
 }

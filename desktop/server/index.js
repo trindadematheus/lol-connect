@@ -21,6 +21,15 @@ app.get('/ngrok/:port', async (req, res) => {
   }
 })
 
+app.delete('/ngrok/delete', async (req, res) => {
+  try {
+    await ngrok.disconnect()
+    await ngrok.kill()
+  } catch (error) {
+    console.log('[Node Server]: ', error)
+  }
+})
+
 app.listen(port, () => {
   console.log(`Node Server APP listening at http://localhost:${port}`)
 })

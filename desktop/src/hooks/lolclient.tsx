@@ -12,14 +12,14 @@ interface LOLClientContext {
 
 const LOLClientContext = createContext<LOLClientContext | null>(null)
 
-export function LOLClientProvider ({ children }: LOLClientProviderProps) {
+export function LOLClientProvider({ children }: LOLClientProviderProps) {
   const [clientData, setClientData] = useState('')
 
   useEffect(() => {
     createClientData()
   }, [])
 
-  async function getCredentials () {
+  async function getCredentials() {
     try {
       const cred = await authenticate()
 
@@ -29,7 +29,7 @@ export function LOLClientProvider ({ children }: LOLClientProviderProps) {
     }
   }
 
-  async function getNgrokURL (port: string) {
+  async function getNgrokURL(port: string) {
     try {
       const { data } = await axios.get(`http://localhost:3000/ngrok/${port}`)
 
@@ -39,7 +39,15 @@ export function LOLClientProvider ({ children }: LOLClientProviderProps) {
     }
   }
 
-  async function createClientData () {
+  async function killNgrok() {
+    axios.delete('http://localhost:3000/ngrok/delete')
+      .then(({ data }) => console.log('[Kill Ngrok]: Kill all process'))
+      .catch(e => console.log('[Kill Ngrok]: ', { e }))
+  }
+
+  async function createClientData() {
+    await killNgrok()
+
     const credentials = await getCredentials()
     const data = await getNgrokURL(JSON.stringify(credentials?.port))
 
@@ -56,7 +64,7 @@ export function LOLClientProvider ({ children }: LOLClientProviderProps) {
   )
 }
 
-export function useLOLClient (): LOLClientContext {
+export function useLOLClient(): LOLClientContext {
   const context = useContext(LOLClientContext)
 
   if (!context) {
