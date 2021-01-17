@@ -6,9 +6,10 @@ export default EStyleSheet.create({
     backgroundColor: 'black'
   },
   title: {
-    color: '#eee',
+    padding: '1.25rem',
+    color: '#D5B26E',
     fontSize: '1.375rem',
-    fontWeight: 'bold',
+    fontFamily: 'Merriweather',
     marginBottom: '1.25rem'
   }
 });

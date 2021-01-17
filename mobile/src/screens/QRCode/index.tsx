@@ -9,10 +9,11 @@ import { useLOLClient } from '../../hooks/lol-client';
 const QRCode: React.FC = () => {
   const { navigate } = useNavigation();
 
-  const { setCredentials } = useLOLClient()
+  const { setNgrokLink } = useLOLClient()
 
   const onSuccess = (e: any) => {
-    setCredentials(JSON.parse(e.data))
+    setNgrokLink(e.data)
+
     navigate('Home')
   }
 

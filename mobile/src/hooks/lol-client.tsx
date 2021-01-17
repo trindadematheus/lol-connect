@@ -1,49 +1,35 @@
-import React, { useState, useEffect, createContext, useContext } from 'react'
 import axios from 'axios'
+import React, { useState, createContext, useContext } from 'react'
 
-import agent from '../utils/agent'
-
-import api from '../services/api'
+import { Summoner } from '../types/api'
 
 interface LOLClientProviderProps {
   children: React.ReactNode
 }
 
-export interface Credentials {
-  url: string;
-  password: string;
-  pid: number;
-  port: number;
-}
-
 interface LOLClientContext {
-  credentials: Credentials;
-  setCredentials(cred: Credentials): void;
-  getCurrentSummoner(): void;
+  ngrokLink: string;
+  setNgrokLink(link: string): void;
+  getCurrentSummoner(): Promise<Summoner | undefined>;
 }
 
 const LOLClientContext = createContext<LOLClientContext | null>(null)
 
 export function LOLClientProvider({ children }: LOLClientProviderProps) {
-  const [credentials, setCredentials] = useState<Credentials>({
-    password: '',
-    url: '',
-    pid: 0,
-    port: 0
-  })
+  const [ngrokLink, setNgrokLink] = useState('')
 
-  async function getCurrentSummoner() {
-    api(credentials).get('/lol-summoner/v1/current-summoner', {
-      httpsAgent: agent
-    })
-      .then(({ data }) => {
-        console.log(data)
-      })
-      .catch(e => console.log(e))
+  async function getCurrentSummoner(): Promise<Summoner | undefined> {
+    try {
+      const { data } = await axios.get<Summoner>(`${ngrokLink}/lol-client/current-summoner`)
+
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
-    <LOLClientContext.Provider value={{ credentials, setCredentials, getCurrentSummoner }}>
+    <LOLClientContext.Provider value={{ ngrokLink, setNgrokLink, getCurrentSummoner }}>
       {children}
     </LOLClientContext.Provider>
   )
