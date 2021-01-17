@@ -21,4 +21,26 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     color: #E1E1E6;
   }
+
+  .boxLoading {
+    perspective: 120px;
+  }
+
+  .coinLoading {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    border: 4px solid #D5B26E;
+    animation: spin 1.5s ease-in-out infinite;
+
+    :hover {
+      border: 4px solid black;
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotateY(540deg);
+    }
+  }
 `

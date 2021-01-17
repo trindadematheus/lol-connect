@@ -1,37 +1,17 @@
 const express = require('express')
-const ngrok = require('ngrok')
 const cors = require('cors')
-const https = require('https')
-const { request } = require('league-connect')
+
+const ngrok = require('./routes/ngrok')
+const lolclient = require('./routes/lolclient')
+const authenticateLOL = require('./middleware/authenticateLOL')
 
 const app = express()
-const port = 3000
 
 app.use(cors())
 
-app.get('/ngrok/:port', async (req, res) => {
-  const { port } = req.params
+app.use('/ngrok', authenticateLOL, ngrok)
+app.use('/lol-client', authenticateLOL, lolclient)
 
-  try {
-    const url = await ngrok.connect(parseInt(port))
-
-    res.json({
-      url: url
-    })
-  } catch (error) {
-    console.log('[Node Server]: ', error)
-  }
-})
-
-app.delete('/ngrok/delete', async (req, res) => {
-  try {
-    await ngrok.disconnect()
-    await ngrok.kill()
-  } catch (error) {
-    console.log('[Node Server]: ', error)
-  }
-})
-
-app.listen(port, () => {
-  console.log(`Node Server APP listening at http://localhost:${port}`)
+app.listen(3000, () => {
+  console.log(`Node Server APP listening at http://localhost:3000`)
 })

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
-import { authenticate } from 'league-connect'
 import axios from 'axios'
 
 interface LOLClientProviderProps {
@@ -7,58 +6,32 @@ interface LOLClientProviderProps {
 }
 
 interface LOLClientContext {
-  clientData: string;
+  ngrokLink: string;
+  getNgrokLink(): void;
 }
 
 const LOLClientContext = createContext<LOLClientContext | null>(null)
 
 export function LOLClientProvider({ children }: LOLClientProviderProps) {
-  const [clientData, setClientData] = useState('')
+  const [ngrokLink, setNgrokLink] = useState('')
 
   useEffect(() => {
-    createClientData()
+    getNgrokLink()
   }, [])
 
-  async function getCredentials() {
+  async function getNgrokLink() {
     try {
-      const cred = await authenticate()
+      const { data } = await axios.get('http://localhost:3000/ngrok')
 
-      return cred
+      setNgrokLink(data.url)
     } catch (error) {
-      console.log('[Get Credentials]: ' + error.message)
+      alert(error.response.data.error)
+      console.log({ error })
     }
-  }
-
-  async function getNgrokURL(port: string) {
-    try {
-      const { data } = await axios.get(`http://localhost:3000/ngrok/${port}`)
-
-      return data
-    } catch (error) {
-      console.log('[Get Ngrok URL]: ' + error)
-    }
-  }
-
-  async function killNgrok() {
-    axios.delete('http://localhost:3000/ngrok/delete')
-      .then(({ data }) => console.log('[Kill Ngrok]: Kill all process'))
-      .catch(e => console.log('[Kill Ngrok]: ', { e }))
-  }
-
-  async function createClientData() {
-    await killNgrok()
-
-    const credentials = await getCredentials()
-    const data = await getNgrokURL(JSON.stringify(credentials?.port))
-
-    setClientData(JSON.stringify({
-      ...credentials,
-      url: data.url
-    }))
   }
 
   return (
-    <LOLClientContext.Provider value={{ clientData }}>
+    <LOLClientContext.Provider value={{ ngrokLink, getNgrokLink }}>
       {children}
     </LOLClientContext.Provider>
   )

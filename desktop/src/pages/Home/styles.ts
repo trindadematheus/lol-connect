@@ -11,13 +11,6 @@ export const Container = styled.div`
   flex: 1;
   justify-content: center;
   align-items: center;
-`
-
-export const QRCodeSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   h2 {
     text-align: center;
@@ -26,6 +19,41 @@ export const QRCodeSection = styled.div`
     font-size: 5rem;
     font-family: 'lolfont';
   }
+
+  button {
+    background: black;
+    border: 2px solid #D5B26E;
+    color: #D5B26E;
+    font-family: 'lolfont';
+    height: 40px;
+    width: 150px;
+    cursor: pointer;
+    transition: 0.4s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    :hover {
+      background: #ecc572 ;
+      color: black;
+      transition: 0.4s;
+    }
+  }
+`
+
+export const ConnectSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+export const QRCodeSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export const QRCodeWrapper = styled.div`
