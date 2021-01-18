@@ -73,6 +73,7 @@
   "dependencies": {
     "@babel/runtime": "^7.12.5",
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "league-connect": "^5.0.2",
@@ -80,6 +81,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-qr-code": "^1.0.5",
+    "socket.io": "^3.1.0",
     "styled-components": "^5.1.1"
   },
   "build": {

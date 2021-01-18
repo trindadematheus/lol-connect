@@ -4,17 +4,23 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000D13',
-    paddingHorizontal: '1.25rem'
   },
   separator: {
-    width: '80%',
+    width: '70%',
     alignSelf: 'center',
     height: '0.0625rem',
     backgroundColor: '#1D1810',
+    marginVertical: '2.5rem'
+  },
+  background: {
+    paddingTop: '6.25rem',
+    paddingBottom: '1.25rem',
+    paddingHorizontal: '1.25rem',
+    borderBottomWidth: '0.0625rem',
+    borderBottomColor: '#372d1e'
   },
   profileArea: {
     marginTop: '3.125rem',
-    marginBottom: '2.5rem',
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -43,13 +49,15 @@ export default EStyleSheet.create({
     fontFamily: 'Merriweather'
   },
   progressBar: {
-    marginTop: '0.3125rem',
+    marginTop: '0.375rem',
     marginLeft: '0.3125rem',
+    borderRadius: '0rem',
     alignSelf: 'flex-start'
   },
   statsSection: {
     marginTop: '2.5rem',
     flexDirection: 'row',
+    paddingHorizontal: '1.25rem',
     justifyContent: 'space-between'
   },
   statsItem: {

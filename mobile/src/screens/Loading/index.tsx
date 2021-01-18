@@ -9,7 +9,7 @@ const Home: React.FC = () => {
       <StatusBar backgroundColor="#000" barStyle="dark-content" />
 
       <View style={S.container} >
-        <ActivityIndicator size="small" color="#D5B26E" />
+        <ActivityIndicator size="large" color="#D5B26E" />
       </View>
     </>
   );

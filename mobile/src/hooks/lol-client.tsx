@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import axios from 'axios'
 
 import { Summoner } from '../types/api'
+import { useEventsOverlay } from './events-overlay';
 
 interface LOLClientProviderProps {
   children: React.ReactNode
@@ -18,23 +19,27 @@ const LOLClientContext = createContext<LOLClientContext | null>(null)
 
 export function LOLClientProvider({ children }: LOLClientProviderProps) {
   const [ngrokLink, setNgrokLink] = useState('')
-  const [socket, setSocket] = useState<SocketIOClient.Socket | {}>({})
+
+  const { showMatchFinded, setShowMatchFinded } = useEventsOverlay()
 
   useEffect(() => {
     if (ngrokLink == '') {
       return;
     }
 
-    console.log('ajsndjklças')
-    const socketClient = io('http://4a83fa3f5eb5.ngrok.io');
-    console.log(socketClient)
+    const socketClient = io(ngrokLink);
 
     socketClient.on('connect', () => console.log('connected'))
-    // setSocket(socketClient)
 
-    // socketClient.on("MATCH_FINDED", () => {
-    //   console.log('achou')
-    // });
+    socketClient.on("MATCH_FINDED", (data: any) => {
+      if (data && data.playerResponse === 'None' && !showMatchFinded) {
+        return setShowMatchFinded(true)
+      }
+
+      if (!data) {
+        return setShowMatchFinded(false)
+      }
+    });
   }, [ngrokLink])
 
   async function getCurrentSummoner(): Promise<Summoner | undefined> {

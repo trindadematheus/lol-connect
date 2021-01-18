@@ -1,6 +1,9 @@
 import React from 'react';
 import { Dimensions } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet';
+
+import MatchFinded from './components/Overlays/MatchFinded';
+import { EventsOverlayProvider } from './hooks/events-overlay';
 import { LOLClientProvider } from './hooks/lol-client';
 
 const { width } = Dimensions.get('window');
@@ -25,9 +28,12 @@ const App: React.FC = () => {
   });
 
   return (
-    <LOLClientProvider>
-      <Routes />
-    </LOLClientProvider>
+    <EventsOverlayProvider>
+      <LOLClientProvider>
+        <MatchFinded />
+        <Routes />
+      </LOLClientProvider>
+    </EventsOverlayProvider>
   );
 }
 
