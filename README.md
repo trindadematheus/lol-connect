@@ -12,7 +12,7 @@
 
 - [X] Dados da conta conectada
 - [X] Aceitar/Recusar partidas na fila
-- [X] Aceitar/Recusar convites de amigos para jogar
+- [ ] Aceitar/Recusar convites de amigos para jogar
 
   [**Ver todas**](https://github.com/trindadematheus/lol-connect/projects/1)
 
