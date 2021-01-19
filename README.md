@@ -9,10 +9,12 @@
 <br />
 
 ## 🌟 Funcionalidades
+> As principais funcionalidades até o momento no app
 
 - [X] Dados da conta conectada
 - [X] Aceitar/Recusar partidas na fila
-- [X] Aceitar/Recusar convites de amigos para jogar
+- [ ] Histórico de partidas
+- [ ] Aceitar/Recusar convites de amigos para jogar
 
   [**Ver todas**](https://github.com/trindadematheus/lol-connect/projects/1)
 
