@@ -76,4 +76,18 @@ router.post('/match-finded-response', async (req, res) => {
   }
 })
 
+router.get('/match-history', async (req, res) => {
+  try {
+    const response = await request({
+      method: 'GET',
+      url: '/lol-match-history/v1/matchlist'
+    }, req.credentials)
+
+    const { games } = await response.json()
+    res.json({ games })
+  } catch (error) {
+    console.log('[Node Server]: ', error)
+  }
+})
+
 module.exports = router;

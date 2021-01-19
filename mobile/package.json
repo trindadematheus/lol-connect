@@ -17,6 +17,7 @@
     "@types/socket.io-client": "^1.4.35",
     "axios": "^0.21.1",
     "buffer": "^6.0.3",
+    "date-fns": "^2.16.1",
     "https-browserify": "^1.0.0",
     "node-libs-react-native": "^1.2.1",
     "react": "16.13.1",
