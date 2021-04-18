@@ -8,7 +8,7 @@
 
 <br />
 
-## 🌟 Funcionalidades
+## Funcionalidades
 > As principais funcionalidades até o momento no app
 
 - [X] Dados da conta conectada
@@ -20,7 +20,7 @@
 
 <br />
 
-## 💻 Tecnologias
+## Tecnologias
 
 > As principais tecnologias utilizadas nesse projeto
 
@@ -31,7 +31,7 @@
 
 <br/>
 
-## ⚔ | Como funciona
+## Como funciona
 
 A aplicação Desktop faz a ponte entre a aplicação Mobile e o Client do LOL por meio de servidores REST e Socket. Ao conectar-se com o LOL Client a aplicação Desktop gera um QRCode que deve ser lido pela aplicação Mobile para estabelecer a conexão entre ambos.
 
